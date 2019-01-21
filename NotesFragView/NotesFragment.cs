@@ -16,16 +16,24 @@ namespace NotesFragView
     public class NotesFragment : ListFragment
     {
         int selectedPlayId;
-
+        DatabaseService dbService;
         public NotesFragment()
         {
-            // Being explicit about the requirement for a default constructor.
+            dbService = new DatabaseService();
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
-            ListAdapter = new ArrayAdapter<String>(Activity, Android.Resource.Layout.SimpleListItemActivated1, NotesTest.Titles);
+
+            var Notes = dbService.GetAllNotes();
+
+            List<string> _notes = new List<string>();
+            foreach (var Note in Notes)
+            {
+                _notes.Add(Note.NoteTitle);
+            }
+            ListAdapter = new ArrayAdapter<String>(Activity, Android.Resource.Layout.SimpleListItemActivated1, _notes);
 
             if (savedInstanceState != null)
             {
