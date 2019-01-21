@@ -13,6 +13,10 @@ namespace NotesFragView
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
+            DatabaseService dbService = new DatabaseService();
+            dbService.AddTestingNotes();
+
         }
     }
 }
