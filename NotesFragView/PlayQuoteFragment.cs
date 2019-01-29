@@ -53,6 +53,13 @@ namespace NotesFragView
     public class PlayQuoteFragment : Fragment
     {
         public int PlayId => Arguments.GetInt("current_play_id", 0);
+        DatabaseService dbService;
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            dbService = new DatabaseService();
+        }
 
         public static PlayQuoteFragment NewInstance(int playId)
         {
@@ -79,7 +86,11 @@ namespace NotesFragView
             var padding = Convert.ToInt32(TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, Activity.Resources.DisplayMetrics));
             textView.SetPadding(padding, padding, padding, padding);
             textView.TextSize = 24;
+<<<<<<< HEAD
             textView.Text = Shakespeare.Dialogue[PlayId];
+=======
+            textView.Text = dbService.GetAllNotes().ElementAt(PlayId).NoteContent;
+>>>>>>> master
 
             var scroller = new ScrollView(Activity);
             scroller.AddView(textView);
