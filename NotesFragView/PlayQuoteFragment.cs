@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,11 +86,11 @@ namespace NotesFragView
             var padding = Convert.ToInt32(TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, Activity.Resources.DisplayMetrics));
             textView.SetPadding(padding, padding, padding, padding);
             textView.TextSize = 24;
-<<<<<<< HEAD
+
             textView.Text = Shakespeare.Dialogue[PlayId];
-=======
-            textView.Text = dbService.GetAllNotes().ElementAt(PlayId).NoteContent;
->>>>>>> master
+
+           // textView.Text = dbService.GetAllNotes().ElementAt(PlayId).NoteContent;
+
 
             var scroller = new ScrollView(Activity);
             scroller.AddView(textView);
