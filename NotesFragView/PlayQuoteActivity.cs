@@ -19,13 +19,17 @@ namespace NotesFragView
         {
             base.OnCreate(savedInstanceState);
 
+            if (Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+            {
+                Finish();
+            }
+
             var playId = Intent.Extras.GetInt("current_play_id", 0);
-
-            var detailsFrag = PlayQuoteFragment.NewInstance(playId);
-
+            var playQuoteFrag = PlayQuoteFragment.NewInstance(playId);
             FragmentManager.BeginTransaction()
-                           .Add(Android.Resource.Id.Content, detailsFrag)
-                           .Commit();
+                            .Add(Android.Resource.Id.Content, playQuoteFrag)
+                            .Commit();
         }
     }
+
 }
