@@ -17,7 +17,7 @@ namespace NotesFragView
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
-        public string NoteTitle { get; set; }
-        public string NoteContent { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }

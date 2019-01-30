@@ -15,26 +15,26 @@ namespace NotesFragView
 {
     public class TitlesFragment : ListFragment
     {
+        public int selectedPlayId;
         bool showingTwoFragments;
-        int selectedPlayId;
 
         public TitlesFragment()
         {
-
+            // Being explicit about the requirement for a default constructor.
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
-            ListAdapter = new ArrayAdapter<String>(Activity, 
-                Android.Resource.Layout.SimpleListItemActivated1,
-                Shakespeare.Titles);
 
-            if(savedInstanceState != null)
+            ListAdapter = new ArrayAdapter<String>(Activity, Android.Resource.Layout.SimpleListItemActivated1, DatabaseService.NotesList.Select(x => x.Title).ToArray());
+
+            if (savedInstanceState != null)
             {
                 selectedPlayId = savedInstanceState.GetInt("current_play_id", 0);
             }
-            var quoteContainer = Activity.FindViewById(Resource.Id.playnote_container);
+
+            var quoteContainer = Activity.FindViewById(Resource.Id.note_container);
             showingTwoFragments = quoteContainer != null &&
                                   quoteContainer.Visibility == ViewStates.Visible;
             if (showingTwoFragments)
@@ -62,23 +62,24 @@ namespace NotesFragView
             {
                 ListView.SetItemChecked(selectedPlayId, true);
 
-                var playQuoteFragment = FragmentManager.FindFragmentById(Resource.Id.playnote_container) as PlayQuoteFragment;
+                PlayNoteFragment playQuoteFragment = FragmentManager.FindFragmentById(Resource.Id.note_container) as PlayNoteFragment;
 
                 if (playQuoteFragment == null || playQuoteFragment.PlayId != playId)
                 {
-                    var container = Activity.FindViewById(Resource.Id.playnote_container);
-                    var quoteFrag = PlayQuoteFragment.NewInstance(selectedPlayId);
+                    var container = Activity.FindViewById(Resource.Id.note_container);
+                    var quoteFrag = PlayNoteFragment.NewInstance(selectedPlayId);
 
                     FragmentTransaction ft = FragmentManager.BeginTransaction();
-                    ft.Replace(Resource.Id.playnote_container, quoteFrag);
+                    ft.Replace(Resource.Id.note_container, quoteFrag);
                     ft.Commit();
                 }
             }
             else
             {
-                var intent = new Intent(Activity, typeof(PlayQuoteActivity));
+                var intent = new Intent(Activity, typeof(PlayNoteActivity));
                 intent.PutExtra("current_play_id", playId);
                 StartActivity(intent);
+
             }
         }
     }

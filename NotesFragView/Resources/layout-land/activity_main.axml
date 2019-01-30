@@ -14,5 +14,5 @@
 		android:layout_weight="1"
 		android:layout_width="0px"
 		android:layout_height="match_parent"
-		android:id="@+id/playnote_container" />
+		android:id="@+id/note_container" />
 </LinearLayout>

@@ -2621,6 +2621,9 @@ namespace NotesFragView
 			// aapt resource value: 0x7f08001e
 			public const int normal = 2131230750;
 			
+			// aapt resource value: 0x7f08008e
+			public const int note_container = 2131230862;
+			
 			// aapt resource value: 0x7f0800ac
 			public const int notification_background = 2131230892;
 			
@@ -2641,9 +2644,6 @@ namespace NotesFragView
 			
 			// aapt resource value: 0x7f08004d
 			public const int pin = 2131230797;
-			
-			// aapt resource value: 0x7f08008e
-			public const int playnote_container = 2131230862;
 			
 			// aapt resource value: 0x7f080006
 			public const int progress_circular = 2131230726;

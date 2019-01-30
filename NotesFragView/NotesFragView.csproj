@@ -57,7 +57,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseServices.cs" />
+    <Compile Include="DatabaseService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="NotesFragment.cs" />
