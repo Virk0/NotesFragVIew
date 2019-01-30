@@ -63,7 +63,7 @@
     <Compile Include="NotesFragment.cs" />
     <Compile Include="NotesTest.cs" />
     <Compile Include="PlayQuoteActivity.cs" />
-    <Compile Include="PlayQuoteFragment.cs" />
+    <Compile Include="PlayNoteFragment.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shakespeare.cs" />

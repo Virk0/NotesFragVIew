@@ -50,29 +50,23 @@ namespace NotesFragView
     //        return scroller;
     //    }
     //}
-    public class PlayQuoteFragment : Fragment
+    public class PlayNoteFragment : Fragment
     {
         public int PlayId => Arguments.GetInt("current_play_id", 0);
-        DatabaseService dbService;
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-            dbService = new DatabaseService();
-        }
+        public static int StatPlayId { get; set; }
+        public static EditText StatEditText { get; set; }
 
-        public static PlayQuoteFragment NewInstance(int playId)
+        public static PlayNoteFragment NewInstance(int playId)
         {
             var bundle = new Bundle();
             bundle.PutInt("current_play_id", playId);
-            return new PlayQuoteFragment { Arguments = bundle };
+            return new PlayNoteFragment { Arguments = bundle };
         }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -81,21 +75,24 @@ namespace NotesFragView
             {
                 return null;
             }
+            var notes = DatabaseService.DatabaseConnection.GetAllNotes();
 
-            var textView = new TextView(Activity);
-            var padding = Convert.ToInt32(TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, Activity.Resources.DisplayMetrics));
-            textView.SetPadding(padding, padding, padding, padding);
-            textView.TextSize = 24;
+            StatPlayId = PlayId;
 
-            textView.Text = Shakespeare.Dialogue[PlayId];
+            List<string> notesList = DatabaseService.NotesList.Select(x => x.Description).ToList();
 
-           // textView.Text = dbService.GetAllNotes().ElementAt(PlayId).NoteContent;
+            var editText = Activity.FindViewById<EditText>(Resource.Id.contentEditText);
+            StatEditText = editText;
+            try
+            {
+                editText.Text = notesList[PlayId];
+            }
+            catch (Exception)
+            {
+                editText.Text = notesList[0];
+            }
 
-
-            var scroller = new ScrollView(Activity);
-            scroller.AddView(textView);
-
-            return scroller;
+            return null;
         }
     }
 }
