@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,43 +13,6 @@ using Android.Widget;
 
 namespace NotesFragView
 {
-    //public class PlayQuoteFragment : Fragment
-    //{
-    //    public int PlayId => Arguments.GetInt("current_play_id", 0);
-    //    DatabaseService dbService;
-
-    //    public override void OnCreate(Bundle savedInstanceState)
-    //    {
-    //        base.OnCreate(savedInstanceState);
-    //        dbService = new DatabaseService();
-    //    }
-
-    //    public static PlayQuoteFragment NewInstance(int playId)
-    //    {
-    //        var bundle = new Bundle();
-    //        bundle.PutInt("current_play_id", playId);
-    //        return new PlayQuoteFragment { Arguments = bundle };
-    //    }
-
-    //    public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    //    {
-    //        if (container == null)
-    //        {
-    //            return null;
-    //        }
-
-    //        var textView = new TextView(Activity);
-    //        var padding = Convert.ToInt32(TypedValue.ApplyDimension(ComplexUnitType.Dip, 4, Activity.Resources.DisplayMetrics));
-    //        textView.SetPadding(padding, padding, padding, padding);
-    //        textView.TextSize = 24;
-    //        textView.Text = dbService.GetAllNotes().ElementAt(PlayId).NoteContent;
-
-    //        var scroller = new ScrollView(Activity);
-    //        scroller.AddView(textView);
-
-    //        return scroller;
-    //    }
-    //}
     public class PlayNoteFragment : Fragment
     {
         public int PlayId => Arguments.GetInt("current_play_id", 0);
@@ -75,11 +38,11 @@ namespace NotesFragView
             {
                 return null;
             }
-            var notes = DatabaseService.DatabaseConnection.GetAllNotes();
+            var notes = DatabaseServices.DatabaseConnection.GetAllNotes();
 
             StatPlayId = PlayId;
 
-            List<string> notesList = DatabaseService.NotesList.Select(x => x.Description).ToList();
+            List<string> notesList = DatabaseServices.NotesList.Select(x => x.NoteContent).ToList();
 
             var editText = Activity.FindViewById<EditText>(Resource.Id.contentEditText);
             StatEditText = editText;
@@ -94,5 +57,23 @@ namespace NotesFragView
 
             return null;
         }
+
+        //private void EditBtn_Click(object sender, EventArgs e)
+        //{
+        //    DatabaseServices.DatabaseConnection.UpdateNote(DatabaseServices.NotesList[PlayId].Id, _editText.Text);
+        //    DatabaseServices.NotesList[PlayId].NoteContent = _editText.Text;
+
+        //    //Very important, please never forget this line.
+        //    Activity.Recreate();
+        //}
+
+        //private void DeleteBtn_Click(object sender, EventArgs e)
+        //{
+        //    DatabaseServices.DatabaseConnection.DeleteNote(DatabaseServices.NotesList[PlayId].Id);
+        //    DatabaseServices.NotesList.RemoveAt(PlayId);
+
+        //    //Very important, please never forget this line.
+        //    Activity.Recreate();
+        //}
     }
 }

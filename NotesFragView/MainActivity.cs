@@ -1,9 +1,17 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
+using Android.Content;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Runtime;
-using Android.Widget;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Views;
+using Android.Widget;
+
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 namespace NotesFragView
 {
@@ -16,9 +24,11 @@ namespace NotesFragView
         protected override void OnCreate(Bundle savedInstanceState)
         {
             _mainActivity = this;
-            DatabaseService.DatabaseConnection = new DatabaseService();
+            AppCenter.Start("b925ac40-664b-4f6f-b9ac-a509a90134d3", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("b925ac40-664b-4f6f-b9ac-a509a90134d3", typeof(Distribute));
+            DatabaseServices.DatabaseConnection = new DatabaseServices();
             //DatabaseServices.DatabaseConnection.CreateDatabase();
-            //DatabaseServices.DatabaseConnection.CreateTableWithData();
+            //DatabaseServices.DatabaseConnection.AddSomeDataToDataBase();
 
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
@@ -44,18 +54,16 @@ namespace NotesFragView
             {
                 switch (id)
                 {
-                    case Resource.Id.editToolBtn:
-                        DatabaseService.DatabaseConnection.UpdateNote(DatabaseService.NotesList[PlayNoteFragment.StatPlayId].Id, PlayNoteFragment.StatEditText.Text);
-                        DatabaseService.NotesList[PlayNoteFragment.StatPlayId].Description = PlayNoteFragment.StatEditText.Text;
-
-                        //Very important, please never forget this line.
-                        this.Recreate();
-                        break;
+                    
                     case Resource.Id.deleteToolBtn:
-                        DatabaseService.DatabaseConnection.DeleteNote(DatabaseService.NotesList[PlayNoteFragment.StatPlayId].Id);
-                        DatabaseService.NotesList.RemoveAt(PlayNoteFragment.StatPlayId);
-
-                        //Very important, please never forget this line.
+                        try
+                        {
+                            DatabaseServices.DatabaseConnection.DeleteNote(DatabaseServices.NotesList[PlayNoteFragment.StatPlayId].Id);
+                            DatabaseServices.NotesList.RemoveAt(PlayNoteFragment.StatPlayId);
+                        }
+                        catch (Exception)
+                        {
+                        }
                         this.Recreate();
                         break;
                     default:
@@ -66,14 +74,12 @@ namespace NotesFragView
             return base.OnOptionsItemSelected(item);
         }
 
-        //Add button on click.
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
             View view = (View)sender;
-            //Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-            //    .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
             var addActivity = new Intent(this, typeof(AddNoteActivity));
             StartActivity(addActivity);
         }
     }
 }
+

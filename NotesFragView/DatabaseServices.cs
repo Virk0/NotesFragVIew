@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 
 using Android.App;
@@ -10,46 +11,44 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using SQLite;
-using System.IO;
-
 
 namespace NotesFragView
 {
-    class DatabaseService
+    class DatabaseServices
     {
         public SQLiteConnection db;
-        public static DatabaseService DatabaseConnection { get; set; }
+        public static DatabaseServices DatabaseConnection { get; set; }
         public static List<Note> NotesList { get; set; }
 
-        public DatabaseService()
+        public DatabaseServices()
         {
             CreateDatabase();
-            CreateTableWithData();
+            AddSomeDataToDataBase();
             NotesList = GetAllNotes().ToList();
         }
 
         public void CreateDatabase()
         {
-            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "notes12.db3");
+            string dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "mydatabase6.db3");
             db = new SQLiteConnection(dbPath);
         }
 
-        public void CreateTableWithData()
+        public void AddSomeDataToDataBase()
         {
             db.CreateTable<Note>();
             if (db.Table<Note>().Count() == 0)
             {
                 var newNote = new Note
                 {
-                    Title = "Test1",
-                    Description = "Test1"
+                    NoteTitle = "Test1",
+                    NoteContent = "Test2"
                 };
                 db.Insert(newNote);
-                newNote.Title = "Test2";
-                newNote.Description = "TestDesc2";
+                newNote.NoteTitle = "Test3";
+                newNote.NoteContent = "Test4";
                 db.Insert(newNote);
-                newNote.Title = "Test3";
-                newNote.Description = "adasdasd";
+                newNote.NoteTitle = "TestTest";
+                newNote.NoteContent = "TestTestTest";
                 db.Insert(newNote);
             }
         }
@@ -58,8 +57,8 @@ namespace NotesFragView
         {
             var newNote = new Note
             {
-                Title = title,
-                Description = description
+                NoteTitle = title,
+                NoteContent = description
             };
             db.Insert(newNote);
         }
@@ -69,8 +68,8 @@ namespace NotesFragView
             var newNote = new Note
             {
                 Id = id,
-                Title = GetOneNote(id).Title,
-                Description = description
+                NoteTitle = GetOneNote(id).NoteTitle,
+                NoteContent = description
             };
             db.Update(newNote);
         }
@@ -98,7 +97,7 @@ namespace NotesFragView
                     return item;
                 }
             }
-            throw new Exception("Table is empty");
+            throw new Exception("Current table is empty");
         }
     }
 }

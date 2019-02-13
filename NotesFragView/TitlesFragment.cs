@@ -27,7 +27,7 @@ namespace NotesFragView
         {
             base.OnActivityCreated(savedInstanceState);
 
-            ListAdapter = new ArrayAdapter<String>(Activity, Android.Resource.Layout.SimpleListItemActivated1, DatabaseService.NotesList.Select(x => x.Title).ToArray());
+            ListAdapter = new ArrayAdapter<String>(Activity, Android.Resource.Layout.SimpleListItemActivated1, DatabaseServices.NotesList.Select(x => x.NoteTitle).ToArray());
 
             if (savedInstanceState != null)
             {
