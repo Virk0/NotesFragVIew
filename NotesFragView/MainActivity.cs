@@ -54,7 +54,17 @@ namespace NotesFragView
             {
                 switch (id)
                 {
-                    
+                    case Resource.Id.SaveBtn:
+                        try
+                        {
+                            DatabaseServices.DatabaseConnection.UpdateNote(DatabaseServices.NotesList[PlayNoteFragment.StatPlayId].Id, PlayNoteFragment.StatEditText.Text);
+                            DatabaseServices.NotesList[PlayNoteFragment.StatPlayId].NoteContent = PlayNoteFragment.StatEditText.Text;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        this.Recreate();
+                        break;
                     case Resource.Id.deleteToolBtn:
                         try
                         {

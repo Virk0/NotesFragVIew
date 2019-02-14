@@ -2376,6 +2376,9 @@ namespace NotesFragView
 			// aapt resource value: 0x7f080037
 			public const int SYM = 2131230775;
 			
+			// aapt resource value: 0x7f0800be
+			public const int SaveBtn = 2131230910;
+			
 			// aapt resource value: 0x7f0800a8
 			public const int action0 = 2131230888;
 			
@@ -2523,8 +2526,8 @@ namespace NotesFragView
 			// aapt resource value: 0x7f080060
 			public const int default_activity_button = 2131230816;
 			
-			// aapt resource value: 0x7f0800bc
-			public const int deleteToolBtn = 2131230908;
+			// aapt resource value: 0x7f0800bd
+			public const int deleteToolBtn = 2131230909;
 			
 			// aapt resource value: 0x7f08009c
 			public const int design_bottom_sheet = 2131230876;
@@ -2637,8 +2640,8 @@ namespace NotesFragView
 			// aapt resource value: 0x7f080061
 			public const int list_item = 2131230817;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int masked = 2131230907;
+			// aapt resource value: 0x7f0800bc
+			public const int masked = 2131230908;
 			
 			// aapt resource value: 0x7f0800ab
 			public const int media_actions = 2131230891;
@@ -2862,6 +2865,9 @@ namespace NotesFragView
 			// aapt resource value: 0x7f080071
 			public const int titleDividerNoCustom = 2131230833;
 			
+			// aapt resource value: 0x7f0800ba
+			public const int titleEditText = 2131230906;
+			
 			// aapt resource value: 0x7f08008f
 			public const int titleText = 2131230863;
 			
@@ -2916,8 +2922,8 @@ namespace NotesFragView
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int visible = 2131230906;
+			// aapt resource value: 0x7f0800bb
+			public const int visible = 2131230907;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;

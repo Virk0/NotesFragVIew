@@ -33,7 +33,7 @@ namespace NotesFragView
         {
             Intent intent = new Intent(Application.Context, typeof(MainActivity));
             StartActivity(intent);
-            await Task.Delay(3000);
+            await Task.Delay(2000);
 
         }
     }
